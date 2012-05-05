@@ -1,0 +1,11 @@
+{
+    "components": [
+        {
+            "name": "force" ,
+            "dependencies": [
+                "python"
+            ],
+            "python": "nox.coreapps.force.force" 
+        }
+    ]
+}
