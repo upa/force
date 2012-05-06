@@ -17,6 +17,7 @@ import logging
 from nox.coreapps.force.fdb import fdb
 
 LOG_FILENAME  = '/var/log/nox/force.log'
+CONFIG_FILE   = 'nox/coreapps/force/force.conf'
 FLOW_LIFETIME = 10
 
 
@@ -26,15 +27,7 @@ class force (Component):
 
         self.log = logging.getLogger ('nox.coreapps.mods.force')
         self.fdb = fdb ()
-
-        self.fdb.install_mac_nwname_binding ('00:11:25:87:f6:e9', 'target1')
-        self.fdb.install_mac_nwname_binding ('00:11:25:87:f6:f0', 'target2')
-        self.fdb.install_mac_nwname_binding ('00:11:25:87:f6:f1', 'target3')
-
-        self.fdb.install_mac_nwname_binding ('a4:ba:db:19:e1:78', 'target1')
-        self.fdb.install_mac_nwname_binding ('a4:ba:db:19:e1:79', 'target2')
-        self.fdb.install_mac_nwname_binding ('a4:ba:db:19:e1:80', 'target3')
-
+        self.fdb.install_mac_nwname_binding_by_configfile (CONFIG_FILE)
         Component.__init__ (self, context)
 
 

@@ -1,6 +1,8 @@
 
 FDB_LIFETIME  = 5
 
+import re
+
 class fdb () :
 
     def __init__ (self) :
@@ -96,4 +98,24 @@ class fdb () :
                 if fdb[dpid][entry]['LIFETIME'] < 0 :
                     del fdb[dpid][entry]
 
+
+    def install_mac_nwname_binding_by_configfile (self, configfile) :
+
+        f = open (configfile, 'r')
+
+        for line in f :
+            line = line.strip ()
+            line = re.sub (r'\t+', ' ', line)
+            line = re.sub (r' +', ' ', line)
+            
+            if re.match (r'^#', line) :
+                continue
+
+            sp = line.split (' ')
+            if len (sp) < 2 :
+                continue
+            
+            self.install_mac_nwname_binding (sp[0], sp[1])
+
+        f.close ()
 
