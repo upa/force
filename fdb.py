@@ -18,6 +18,10 @@ class fdb () :
         if self.mdb.has_key (mac) :
             del self.mdb[mac]
 
+    def uninstall_all_mac_nwname_binding (self) :
+        for mac in self.mdb.keys () :
+            del self.mdb[mac]
+
     def install_dpid (self, dpid) :
         self.ndb[dpid] = {}
         self.fdb[dpid] = {}

@@ -89,6 +89,11 @@ class force (Component):
     
     def process_timer_call_back (self) :
         self.fdb.decrement_entry_lifetime ()
+        self.fdb.uninstall_all_mac_nwname_binding ()
+        self.fdb.install_mac_nwname_binding_by_configfile (CONFIG_FILE)
+
+        self.post_callback (1, self.process_timer_call_back)
+
 
 
     def process_datapath_join (self, dpid, status) :
